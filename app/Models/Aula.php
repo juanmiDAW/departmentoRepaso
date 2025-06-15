@@ -9,4 +9,14 @@ class Aula extends Model
 {
     /** @use HasFactory<\Database\Factories\AulaFactory> */
     use HasFactory;
+
+    protected $fillable =['nombre'];
+
+    public function ordenadores(){
+        return $this->hasMany(Ordenador::class);
+    }
+    
+    public function cambios(){
+        return $this->hasMany(Cambio::class);
+    }
 }

@@ -9,4 +9,18 @@ class Cambio extends Model
 {
     /** @use HasFactory<\Database\Factories\CambioFactory> */
     use HasFactory;
+
+    protected $fillable = ['ordenador_id', 'origen_id', 'destino_id'];
+
+    public function ordenador(){
+        return $this->belongsTo(Ordenador::class);
+    }
+
+    public function origen(){
+        return $this->belongsTo(Aula::class, 'origen_id');
+    }
+
+    public function destino(){
+        return $this->belongsTo(Aula::class, 'destino_id');
+    }
 }
