@@ -63,6 +63,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    @livewire('eliminar', ['ordenador_id'=>$ordenador->id])
 
                 </div>
             </div>
