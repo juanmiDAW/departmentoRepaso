@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreOrdenadorRequest;
 use App\Http\Requests\UpdateOrdenadorRequest;
 use App\Models\Ordenador;
+use Livewire\Volt\Actions\ReturnRules;
 
 class OrdenadorController extends Controller
 {
@@ -13,7 +14,7 @@ class OrdenadorController extends Controller
      */
     public function index()
     {
-        //
+        return view('ordenadores.index', ['ordenadores' => Ordenador::all()]);
     }
 
     /**
@@ -21,7 +22,7 @@ class OrdenadorController extends Controller
      */
     public function create()
     {
-        //
+        return view('ordenadores.create');
     }
 
     /**
@@ -29,7 +30,11 @@ class OrdenadorController extends Controller
      */
     public function store(StoreOrdenadorRequest $request)
     {
-        //
+        $validate = $request->validated();
+
+        Ordenador::create($validate);
+
+        return redirect()->route('ordenadores.index');
     }
 
     /**
@@ -37,7 +42,7 @@ class OrdenadorController extends Controller
      */
     public function show(Ordenador $ordenador)
     {
-        //
+        return view('ordenadores.show', ['ordenador'=>$ordenador]);
     }
 
     /**
@@ -45,7 +50,7 @@ class OrdenadorController extends Controller
      */
     public function edit(Ordenador $ordenador)
     {
-        //
+        return view('ordenadores.edit',['ordenador'=>$ordenador]);
     }
 
     /**
@@ -53,7 +58,13 @@ class OrdenadorController extends Controller
      */
     public function update(UpdateOrdenadorRequest $request, Ordenador $ordenador)
     {
-        //
+        $validate = $request->validated();
+
+        $ordenador->fill($validate);
+
+        $ordenador->save();
+
+        return redirect()->route('ordenadores.index');
     }
 
     /**
@@ -61,6 +72,8 @@ class OrdenadorController extends Controller
      */
     public function destroy(Ordenador $ordenador)
     {
-        //
+        $ordenador->delete();
+
+        return redirect()->route('ordenadores.index');
     }
 }
