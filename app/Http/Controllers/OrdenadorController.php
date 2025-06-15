@@ -43,6 +43,8 @@ class OrdenadorController extends Controller
      */
     public function show(Ordenador $ordenador)
     {
+        $ordenador = Ordenador::with('cambios')->where('id', $ordenador->id)->first();
+
         return view('ordenadores.show', ['ordenador'=>$ordenador]);
     }
 

@@ -44,6 +44,26 @@
                             </dd>
                         </div>
                     </dl>
+                    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                        Historico de cambios
+                    </h2>
+                    <table>
+                        <tr>
+                            <thead>
+                                <th>Origen</th>
+                                <th>Destino</th>
+                            </thead>
+                        </tr>
+                        <tbody>
+                            @foreach ($ordenador->cambios as $cambios)
+                                <tr>
+                                    <td>{{ $cambios->origen_id }}</td>
+                                    <td>{{ $cambios->destino_id }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+
                 </div>
             </div>
         </div>
