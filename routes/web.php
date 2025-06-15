@@ -15,4 +15,4 @@ Route::view('profile', 'profile')
 
 require __DIR__.'/auth.php';
 
-Route::resource('ordenadores', OrdenadorController::class);
+Route::resource('ordenadores', OrdenadorController::class)->parameters(['ordenadores'=>'ordenador']);

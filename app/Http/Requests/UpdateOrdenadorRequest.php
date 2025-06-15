@@ -22,7 +22,9 @@ class UpdateOrdenadorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nombre'=>'required|string|max:255',
+            'marca'=>'required|string|max:255',
+            'modelo'=>'required|string|max:255',
+            'aula_id'=>'required|integer',
         ];
     }
 }
