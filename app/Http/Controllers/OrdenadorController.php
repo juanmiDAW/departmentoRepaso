@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreOrdenadorRequest;
 use App\Http\Requests\UpdateOrdenadorRequest;
+use App\Models\Cambio;
 use App\Models\Ordenador;
 use Livewire\Volt\Actions\ReturnRules;
 
@@ -50,6 +51,8 @@ class OrdenadorController extends Controller
      */
     public function edit(Ordenador $ordenador)
     {
+
+
         return view('ordenadores.edit',['ordenador'=>$ordenador]);
     }
 
@@ -58,6 +61,15 @@ class OrdenadorController extends Controller
      */
     public function update(UpdateOrdenadorRequest $request, Ordenador $ordenador)
     {
+
+        $cambio = Ordenador::where('id', $ordenador->id)->first();
+        if($cambio->aula_id != $request->aula_id){
+            Cambio::create([
+                'ordenador_id'=>$ordenador->id,
+                'origen_id'=>$cambio->aula_id,
+                'destino_id'=>$request->aula_id,
+            ]);
+        }
         $validate = $request->validated();
 
         $ordenador->fill($validate);
